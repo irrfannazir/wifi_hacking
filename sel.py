@@ -8,6 +8,24 @@ import time
 from brute_force import run_aircrack, display
 from ap_display import lcd_menu
 import os
+import subprocess
+
+def setup_python_env(env_name="myenv"):
+    try:
+        # Create a virtual environment
+        subprocess.run(f"python3 -m venv {env_name}", shell=True, check=True)
+        # print(f"✅ Virtual environment '{env_name}' created.")
+
+        # Activate the environment & Install Selenium
+        command = f"source {env_name}/bin/activate && pip install --upgrade pip selenium"
+        subprocess.run(command, shell=True, executable="/bin/bash", check=True)
+        display("Selenium installed")
+
+        # return f"Environment '{env_name}' is ready!"
+    
+    except subprocess.CalledProcessError as e:
+        # return f"❌ Error: {e.stderr}"
+
 
 DOWNLOADED_PATH = "/home/pi/Downloads/capture.hccapx"
 driver = None
@@ -44,8 +62,10 @@ def isvisible(element_id):
 display("Welcome.")
 
 a = 0
+setup_python_env()
 while a == 0:
     try:
+        display(out)
         try:
             i = 0
             while get_wifi_name() != "ManagementAP" and i < 10:
