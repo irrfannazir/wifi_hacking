@@ -105,7 +105,7 @@ while a == 0:
             driver2.get("http://192.168.4.1/capture.hccapx")
             time.sleep(3)
             driver.find_element("id", "result").find_element(By.TAG_NAME, "button").click()
-            # os.remove(DOWNLOADED_PATH)
+            os.remove(DOWNLOADED_PATH)
             driver2.quit()
     else:
         display("Page not found")
