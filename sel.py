@@ -1,4 +1,5 @@
 import subprocess
+from brute_force import display
 def setup_python_env(env_name="myenv"):
     try:
         # Create a virtual environment
@@ -26,7 +27,7 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
 from connect import get_wifi_name, connect_to_wifi
 import time
-from brute_force import run_aircrack, display
+from brute_force import run_aircrack
 from ap_display import lcd_menu
 import os
 
