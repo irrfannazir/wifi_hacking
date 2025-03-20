@@ -21,10 +21,10 @@ def setup_python_env(env_name="myenv"):
         subprocess.run(command, shell=True, executable="/bin/bash", check=True)
         display("Selenium installed")
 
-        # return f"Environment '{env_name}' is ready!"
+        return f"Environment '{env_name}' is ready!"
     
     except subprocess.CalledProcessError as e:
-        # return f"❌ Error: {e.stderr}"
+        return f"❌ Error: {e.stderr}"
 
 
 DOWNLOADED_PATH = "/home/pi/Downloads/capture.hccapx"
