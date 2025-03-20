@@ -4,13 +4,13 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from connect import get_wifi_name, connect_to_wifi
 import time
-# from brute_force import run_aircrack
-# from ap_display import lcd_menu
+from brute_force import run_aircrack
+from ap_display import lcd_menu
 import os
 
 DOWNLOADED_PATH = None
 driver = None
-STARTING_WAIT_TIME = 5
+LOADING_WAIT_TIME = 5
 
 def extract_substrings(str_list):
     result=[]
@@ -26,10 +26,6 @@ def choose_attack_method():
 def choose_time():
     return "20"
 
-def lcd_menu(item_list):
-    a = int(input())
-    return a
-
 
 def isvisible(element_id):
     try:
@@ -43,12 +39,13 @@ def isvisible(element_id):
         display("Rendering..")
         return 0
 
-a = 0
 
 def display(content : str):
     print(content.upper())
 
 display("Welcome.")
+
+a = 0
 while a == 0:
     try:
         i = 0
@@ -62,9 +59,8 @@ while a == 0:
     service = Service(r"C:\chromedriver\chromedriver.exe")
     driver = webdriver.Chrome(service=service)
     driver.get("http://192.168.4.1")  # Your ESP32 web server URL
-    # time.sleep(2)
     display("Loading")
-    time.sleep(5)
+    time.sleep(LOADING_WAIT_TIME)
     if(isvisible("ready")):
         print("Ready.")
         row = driver.find_elements(By.TAG_NAME, "table")[0]
