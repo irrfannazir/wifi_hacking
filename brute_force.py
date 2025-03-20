@@ -60,6 +60,11 @@ def display_password(password):
     lcd_message(password, LCD_LINE_2)
     print(f"Displayed password: {password}")
 
+def display(content):
+    lcd_init()
+    lcd_message(content, LCD_LINE_1)
+    
+
 # Run Aircrack-ng and capture output
 def run_aircrack():
     # Customize this command!
