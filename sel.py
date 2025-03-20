@@ -1,3 +1,5 @@
+setup_python_env()
+
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -62,10 +64,8 @@ def isvisible(element_id):
 display("Welcome.")
 
 a = 0
-setup_python_env()
 while a == 0:
     try:
-        display(out)
         try:
             i = 0
             while get_wifi_name() != "ManagementAP" and i < 10:
