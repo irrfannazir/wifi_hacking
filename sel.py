@@ -1,3 +1,4 @@
+import subprocess
 def setup_python_env(env_name="myenv"):
     try:
         # Create a virtual environment
@@ -28,7 +29,7 @@ import time
 from brute_force import run_aircrack, display
 from ap_display import lcd_menu
 import os
-import subprocess
+
 
 
 DOWNLOADED_PATH = "/home/pi/Downloads/capture.hccapx"
