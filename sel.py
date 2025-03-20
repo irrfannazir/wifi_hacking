@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.chrome.options import Options
 from connect import get_wifi_name, connect_to_wifi
 import time
 from brute_force import run_aircrack, display
@@ -54,7 +55,11 @@ while a == 0:
                 display("Can't connect.")
         except Exception as e:
             print("Test the connectivity to Raspberry")
-        service = Service(r"C:\chromedriver\chromedriver.exe")
+        service = Service(r"usr/lib/chromium-browser/chromedriver.exe")
+        options = Options()
+        options.add_argument("--headless")
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
         driver = webdriver.Chrome(service=service)
         driver.get("http://192.168.4.1")  # Your ESP32 web server URL
         display("Loading")
