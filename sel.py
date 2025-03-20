@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from connect import get_wifi_name, connect_to_wifi
 import time
-from brute_force import run_aircrack
+from brute_force import run_aircrack, display
 from ap_display import lcd_menu
 import os
 
@@ -35,13 +35,10 @@ def isvisible(element_id):
         else:
             return 0
     except:
-        print(f"Element with ID '{element_id}' **not found**.")
+        # print(f"Element with ID '{element_id}' **not found**.")
         display("Rendering..")
         return 0
 
-
-def display(content : str):
-    print(content.upper())
 
 display("Welcome.")
 
@@ -62,17 +59,17 @@ while a == 0:
     display("Loading")
     time.sleep(LOADING_WAIT_TIME)
     if(isvisible("ready")):
-        print("Ready.")
+        # print("Ready.")
         row = driver.find_elements(By.TAG_NAME, "table")[0]
         aplist = []
         for i in range(1, len(row.find_elements(By.TAG_NAME, "tr"))):
             ap_details = row.find_elements(By.TAG_NAME, "tr")[i]
             ap = ap_details.find_elements(By.TAG_NAME, "td")[0].text
             aplist.append(ap)
-        print(aplist)
+        # print(aplist)
         index = lcd_menu(aplist)
         if len(aplist) == 0:
-            print("No Wifi found.\n")
+            display("Nothing found.")
             exit()
         display("Attacking")
         row.find_elements(By.TAG_NAME, "tr")[1+index].click()
@@ -87,17 +84,18 @@ while a == 0:
         driver.quit()
         continue
     elif isvisible("running"):
-        print("Running.")
+        # print("Running.")
     elif isvisible("result"):
-        print("Result.")
+        # print("Result.")
         handshake_data = driver.find_element("id", "result").find_elements(By.TAG_NAME, "pre")
         if(len(handshake_data) == 0):
             error_occured = 1
             display("Try Again!")
+            continue
         else:
             error_occured = 0
             driver2 = webdriver.Chrome(service=service)
-            print("handshake file caught")
+            # print("handshake file caught")
             driver2.get("http://192.168.4.1/capture.hccapx")
             time.sleep(3)
             driver.find_element("id", "result").find_element(By.TAG_NAME, "button").click()
