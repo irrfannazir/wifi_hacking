@@ -107,4 +107,4 @@ while a == 0:
         display("Page not found")
         driver.quit()
     a = 1
-# run_aircrack()
+run_aircrack()
